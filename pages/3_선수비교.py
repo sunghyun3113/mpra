@@ -122,9 +122,23 @@ def get_full_analyzed(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ── 헤더 ─────────────────────────────────────────────────────
-st.title("📊 선수 비교 대시보드")
-st.markdown("선수 간 감성 여론 및 리스크 점수 비교 분석 | 2026년 1월 ~ 5월")
-st.markdown("---")
+st.html("""
+<div style="
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #1D9E75;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+">
+    <div style="font-size: 1.4rem; font-weight: 700; color: #0a2e1f;">
+        👥 선수 비교 분석
+    </div>
+    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+        전체 선수의 리스크를 한눈에 비교합니다
+    </div>
+</div>
+""")
 
 # 2명 미만 선택 시 조기 종료
 if len(selected) < 2:
@@ -222,6 +236,7 @@ with col_radar:
         paper_bgcolor="white",
     )
     stack_fig.update_yaxes(showgrid=False)
+    stack_fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(stack_fig, use_container_width=True)
 
 with col_risk:
@@ -259,6 +274,7 @@ with col_risk:
         margin=dict(t=30, b=40, l=80, r=80),
     )
     risk_fig.update_yaxes(showgrid=False)
+    risk_fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(risk_fig, use_container_width=True)
 
 st.markdown("---")
@@ -295,6 +311,7 @@ grouped_fig.update_layout(
     paper_bgcolor="white",
 )
 grouped_fig.update_xaxes(showgrid=False)
+grouped_fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
 st.plotly_chart(grouped_fig, use_container_width=True)
 
 st.markdown("---")

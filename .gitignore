@@ -7,9 +7,7 @@ __pycache__/
 .env
 
 # 임시 스크립트
-_fix_comments.py
-_relabel.py
-_rewrite.py
+_*.py
 
 # Streamlit secrets
 .streamlit/secrets.toml

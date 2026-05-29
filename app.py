@@ -18,23 +18,89 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-[data-testid="stSidebar"] { background-color: #0a2e1f; }
+/* ── 전체 배경 ── */
+.stApp {
+    background-color: #F0F2F6;
+}
+
+/* ── 사이드바 ── */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0a2e1f 0%, #1a4a30 100%);
+    border-right: 1px solid #1D9E75;
+}
 [data-testid="stSidebar"] * { color: #ffffff !important; }
 [data-testid="stSidebarNav"] { display: none; }
 [data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.18); }
-.stButton button { background-color: #1D9E75; color: white; border: none; }
-.stButton button:hover { background-color: #17876a; }
 
-.mpra-header {
-    background: linear-gradient(135deg, #0a2e1f 0%, #1a6b4a 60%, #1D9E75 100%);
-    border-radius: 16px;
-    padding: 44px 52px;
-    margin-bottom: 32px;
+/* ── 메인 컨텐츠 여백 ── */
+.main .block-container {
+    padding: 2rem 2.5rem;
+    max-width: 1200px;
 }
-.mpra-logo  { font-size: 3.4rem; font-weight: 900; color: #fff; margin: 0 0 10px; line-height: 1; }
-.mpra-slogan { font-size: 1.3rem; color: #a8f0d9; margin: 0 0 6px; font-weight: 600; }
-.mpra-subtitle { font-size: 0.95rem; color: #6fcfb0; margin: 0; letter-spacing: 0.3px; }
 
+/* ── 버튼 ── */
+.stButton > button {
+    background-color: #1D9E75;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.stButton > button:hover {
+    background-color: #168a63;
+    box-shadow: 0 4px 12px rgba(29,158,117,0.3);
+}
+
+/* ── 셀렉트박스 ── */
+.stSelectbox > div > div {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* ── 탭 ── */
+.stTabs [data-baseweb="tab-list"] {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 4px;
+}
+.stTabs [data-baseweb="tab"] {
+    border-radius: 8px;
+    font-weight: 500;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #1D9E75 !important;
+    color: white !important;
+}
+
+/* ── 데이터프레임 ── */
+.stDataFrame {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ── 메트릭 카드 (Streamlit 기본) ── */
+div[data-testid="metric-container"] {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ── 경고/성공/에러 박스 ── */
+.stAlert { border-radius: 10px; }
+
+/* ── 구분선 ── */
+hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 1.5rem 0;
+}
+
+/* ── MPRA 커스텀 컴포넌트 ── */
 .metric-card {
     background: #ffffff;
     border-radius: 12px;
@@ -76,28 +142,41 @@ st.markdown("""
 
 # ── 사이드바 ─────────────────────────────────────────────────
 with st.sidebar:
+    # 로고 영역
     st.markdown("""
-    <div style='text-align:center;padding:20px 0 10px;'>
-      <div style='font-size:2.2rem;line-height:1;'>⚽</div>
-      <div style='font-size:1.4rem;font-weight:900;letter-spacing:2px;margin-top:6px;'>MPRA</div>
-      <div style='font-size:0.7rem;color:#6fcfb0;margin-top:4px;'>v1.0 &nbsp;·&nbsp; 2026</div>
+    <div style="text-align: center; padding: 1rem 0 1.5rem;">
+        <div style="font-size: 2rem;">⚽</div>
+        <div style="font-size: 1.4rem; font-weight: 800; color: white; letter-spacing: 1px;">
+            MPRA
+        </div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 2px;">
+            v1.0 · 2026 시즌
+        </div>
+    </div>
+    <hr style="border-color: rgba(255,255,255,0.15); margin: 0 0 1rem;">
+    """, unsafe_allow_html=True)
+
+    # 메뉴
+    st.markdown("""
+    <div style="font-size: 0.7rem; color: rgba(255,255,255,0.4);
+                letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+        MENU
     </div>
     """, unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown(
-        "<p style='font-size:0.7rem;letter-spacing:2px;color:#6fcfb0;margin-bottom:10px;'>MENU</p>",
-        unsafe_allow_html=True,
-    )
     st.page_link("app.py",                        label="🏠 대시보드")
     st.page_link("pages/1_감성분석.py",            label="📊 감성 분석")
     st.page_link("pages/2_리스크알람.py",           label="🚨 리스크 알람")
     st.page_link("pages/3_선수비교.py",             label="👥 선수 비교")
     st.page_link("pages/4_이적가시뮬레이터.py",     label="💰 이적가 시뮬레이터")
     st.page_link("pages/5_AI대응문구.py",           label="🤖 AI 대응 문구")
-    st.markdown("---")
+
+    # 하단 정보
     st.markdown("""
-    <div style='text-align:center;padding:6px 0 12px;'>
-      <div style='font-size:0.7rem;color:#6fcfb0;'>Powered by Claude AI</div>
+    <div style="position: fixed; bottom: 2rem;
+                font-size: 0.7rem; color: rgba(255,255,255,0.3);
+                text-align: center;">
+        Powered by Claude AI<br>
+        © 2026 MPRA System
     </div>
     """, unsafe_allow_html=True)
 
@@ -138,10 +217,33 @@ with st.spinner("AI 감성 분석 중..."):
 
 # ── 헤더 배너 ────────────────────────────────────────────────
 st.markdown("""
-<div class="mpra-header">
-  <p class="mpra-logo">⚽ MPRA</p>
-  <p class="mpra-slogan">경기장 밖의 데이터로 선수의 가치를 지킵니다</p>
-  <p class="mpra-subtitle">AI 기반 선수 멘탈 리스크 &amp; 팬덤 여론 관리 시스템</p>
+<div style="
+    background: linear-gradient(135deg, #0a2e1f 0%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+">
+    <div>
+        <div style="font-size: 2.2rem; font-weight: 800; color: white; letter-spacing: -0.5px;">
+            ⚽ MPRA
+        </div>
+        <div style="font-size: 1rem; color: rgba(255,255,255,0.85); margin-top: 4px;">
+            Player Mental &amp; Public Risk AI
+        </div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 2px;">
+            경기장 밖의 데이터로 선수의 가치를 지킵니다
+        </div>
+    </div>
+    <div style="text-align: right;">
+        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">실시간 모니터링</div>
+        <div style="font-size: 1.1rem; font-weight: 700; color: #9FE1CB;">● LIVE</div>
+        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 4px;">
+            2026 시즌
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 

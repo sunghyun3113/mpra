@@ -90,9 +90,23 @@ def get_full_analyzed(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ── 헤더 ─────────────────────────────────────────────────────
-st.title("🚨 리스크 알람 대시보드")
-st.markdown("전체 선수 여론 리스크 자동 모니터링 | 2026년 1월 ~ 5월")
-st.markdown("---")
+st.html("""
+<div style="
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #1D9E75;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+">
+    <div style="font-size: 1.4rem; font-weight: 700; color: #0a2e1f;">
+        🚨 리스크 알람 센터
+    </div>
+    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+        위험 등급 선수를 즉시 감지하고 알람을 발송합니다
+    </div>
+</div>
+""")
 
 # ── 기간 필터 ─────────────────────────────────────────────────
 col_filter, col_meta = st.columns([2, 3])
@@ -240,7 +254,8 @@ def make_gauge(value: float, player: str, grade: str) -> go.Figure:
     fig.update_layout(
         height=230,
         margin=dict(t=70, b=10, l=15, r=15),
-        paper_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="white",
+        font=dict(family='sans-serif', color='#2C2C2C'),
     )
     return fig
 

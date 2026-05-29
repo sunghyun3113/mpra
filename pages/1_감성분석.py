@@ -120,11 +120,23 @@ df_all = load_data(_mtime=os.path.getmtime(os.path.join(os.path.dirname(os.path.
 player_df = df_all[df_all["player_name"] == selected_player].copy()
 
 # ── 헤더 ─────────────────────────────────────────────────────
-st.title("💬 감성 분석 대시보드")
-st.markdown(
-    f"**{selected_player}** 선수에 대한 여론 감성 분석 | 2026년 1월 ~ 5월"
-)
-st.markdown("---")
+st.html("""
+<div style="
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #1D9E75;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+">
+    <div style="font-size: 1.4rem; font-weight: 700; color: #0a2e1f;">
+        📊 감성 분석 대시보드
+    </div>
+    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+        선수별 SNS 여론을 실시간으로 분석합니다
+    </div>
+</div>
+""")
 
 with st.spinner(f"🔄 {selected_player} 댓글 감성 분석 중..."):
     analyzed = get_analyzed_player(player_df, selected_player)
@@ -167,6 +179,7 @@ with col_donut:
         legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5),
         height=300,
     )
+    donut.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(donut, use_container_width=True)
 
 with col_line:
@@ -214,6 +227,7 @@ with col_line:
         paper_bgcolor="white",
     )
     line_fig.update_xaxes(showgrid=False)
+    line_fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(line_fig, use_container_width=True)
 
 st.markdown("---")
@@ -294,6 +308,7 @@ if keywords:
         paper_bgcolor="white",
     )
     bar_fig.update_yaxes(showgrid=False)
+    bar_fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(bar_fig, use_container_width=True)
 else:
     st.info("부정 댓글이 없어 키워드를 추출할 수 없습니다.")

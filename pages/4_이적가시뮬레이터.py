@@ -353,9 +353,23 @@ with st.sidebar:
 
 
 # ── 헤더 ─────────────────────────────────────────────────────
-st.title("🔄 이적가 시뮬레이터")
-st.markdown("이슈 유형·대응 방식·심각도에 따른 이적 시장 가치 변화 예측 | 2026년 기준 (단위: 억 원)")
-st.markdown("---")
+st.html("""
+<div style="
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #1D9E75;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+">
+    <div style="font-size: 1.4rem; font-weight: 700; color: #0a2e1f;">
+        💰 이적가 방어 시뮬레이터
+    </div>
+    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+        위기 대응 시나리오별 이적가 변화를 예측합니다
+    </div>
+</div>
+""")
 
 # ── 메인 레이아웃 (좌 1 : 우 2) ──────────────────────────────
 col_left, col_right = st.columns([1, 2], gap="large")
@@ -583,6 +597,7 @@ with col_right:
         paper_bgcolor="white",
     )
     fig.update_xaxes(showgrid=False)
+    fig.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(fig, use_container_width=True)
 
     # ── 최선/최악/선택 비교 테이블 ───────────────────────────
@@ -805,6 +820,7 @@ else:
         paper_bgcolor="white",
     )
     _tl.update_xaxes(showgrid=False)
+    _tl.update_layout(paper_bgcolor='white', plot_bgcolor='#F8F9FA', font=dict(family='sans-serif', color='#2C2C2C'), margin=dict(t=40, b=40, l=40, r=40))
     st.plotly_chart(_tl, use_container_width=True)
 
     st.caption(

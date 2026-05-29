@@ -434,9 +434,23 @@ with st.sidebar:
     )
 
 # ── 헤더 ─────────────────────────────────────────────────────
-st.title("🤖 AI 대응 문구 생성기")
-st.markdown("템플릿 기반 위기 대응 문구 자동 생성 · 악성 댓글 분류 · PDF 리포트 | 2026년")
-st.markdown("---")
+st.html("""
+<div style="
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #1D9E75;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+">
+    <div style="font-size: 1.4rem; font-weight: 700; color: #0a2e1f;">
+        🤖 AI 대응 문구 생성기
+    </div>
+    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+        위기 상황에 맞는 대응 문구를 자동으로 생성합니다
+    </div>
+</div>
+""")
 
 # ╔══════════════════════════════════════════════════╗
 # ║  섹션 1: 입력 + 문구 생성                          ║
