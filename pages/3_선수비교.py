@@ -341,8 +341,20 @@ cmp_df = (
     .reset_index(drop=True)
 )
 
-_styler = cmp_df.style.background_gradient(
-    subset=["리스크 점수"], cmap="RdYlGn_r", vmin=0, vmax=100
+def color_risk(val):
+    try:
+        v = float(val)
+        if v >= 70:
+            return 'background-color: #ffcccc; color: #8b0000; font-weight: bold;'
+        elif v >= 40:
+            return 'background-color: #fff3cc; color: #856404; font-weight: bold;'
+        else:
+            return 'background-color: #ccf0e0; color: #0a5c36; font-weight: bold;'
+    except Exception:
+        return ''
+
+_styler = cmp_df.style.map(
+    color_risk, subset=["리스크 점수"]
 ).format({"리스크 점수": "{:.1f}"})
 
 st.dataframe(_styler, use_container_width=True, hide_index=True)
