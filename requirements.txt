@@ -1,9 +1,7 @@
-streamlit
-transformers
-torch
-pandas
-plotly
-anthropic
-reportlab
-scikit-learn
-numpy
+streamlit>=1.27.0
+pandas>=1.5.0
+plotly>=5.0.0
+reportlab>=3.6.0
+numpy>=1.23.0
+qrcode[pil]>=7.4.2
+Pillow>=9.0.0
