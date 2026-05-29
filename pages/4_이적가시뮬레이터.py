@@ -21,12 +21,13 @@ PLAYER_TEAMS: dict[str, str] = {
     "설영우": "즈베즈다",
 }
 
+# Transfermarkt 2026년 기준 · 환율 1,650원/€ 적용
 DEFAULT_VALUES: dict[str, int] = {
-    "이강인": 1800,
-    "손흥민":  250,
-    "김민재":  380,
-    "황희찬":  480,
-    "설영우":  150,
+    "김민재":  528,   # €3,200만
+    "이강인":  412,   # €2,500만
+    "손흥민":  330,   # €2,000만
+    "황희찬":  198,   # €1,200만
+    "설영우":    7,   # €45만
 }
 
 # base_drop: 심각도 중간(4~6) 기준 이적가 하락 비율
@@ -83,23 +84,23 @@ ISSUE_ADVICE: dict[str, str] = {
 
 REFERENCE_CASES = [
     {
-        "player": "이강인 (PSG)",   "issue": "팬과의 갈등",   "year": "2026.02",
+        "player": "이강인 (PSG)",      "issue": "팬과의 갈등",   "year": "2026.02",
         "response": "즉시 공식 사과문 발표",
-        "before": "1,800억 원", "after": "1,755억 원", "change": "-2.5%", "defense": "76%",
+        "before": "412억 원", "after": "402억 원", "change": "-2.5%", "defense": "76%",
         "result": "✅ 이적가 방어 성공",
         "bg": "#e3f2fd", "border": "#1565c0",
     },
     {
-        "player": "손흥민 (LAFC)",  "issue": "은퇴 루머 확산", "year": "2026.03",
+        "player": "손흥민 (LAFC)",     "issue": "은퇴 루머 확산", "year": "2026.03",
         "response": "선수 직접 해명 영상",
-        "before": "250억 원", "after": "244억 원", "change": "-2.3%", "defense": "82%",
+        "before": "330억 원", "after": "322억 원", "change": "-2.3%", "defense": "82%",
         "result": "✅ 신속 대응으로 방어",
         "bg": "#e8f5e9", "border": "#2e7d32",
     },
     {
-        "player": "김민재 (바이에른)", "issue": "부상 소식",   "year": "2026.04",
+        "player": "김민재 (바이에른)", "issue": "부상 소식",      "year": "2026.04",
         "response": "조용히 무마 (대응 없음)",
-        "before": "380억 원", "after": "319억 원", "change": "-16.0%", "defense": "0%",
+        "before": "528억 원", "after": "443억 원", "change": "-16.1%", "defense": "0%",
         "result": "🔴 미대응으로 이적가 급락",
         "bg": "#ffebee", "border": "#e53935",
     },
@@ -390,10 +391,10 @@ with col_left:
     base_value: float = float(
         st.number_input(
             "현재 이적가 (억 원)",
-            min_value=10,
-            max_value=5000,
+            min_value=1,
+            max_value=1000,
             value=DEFAULT_VALUES[player],
-            step=10,
+            step=5,
             format="%d",
             key=f"base_value_{player}",
         )
@@ -829,3 +830,6 @@ else:
         "**✅ 여론 회복** (초록 실선) &nbsp;&nbsp;|&nbsp;&nbsp; "
         "점: 개별 댓글 감성 점수 (💚긍정 / 🔴부정)"
     )
+
+st.markdown("---")
+st.caption("※ 이적가 기준: Transfermarkt 2026년 데이터 · 환율 1,650원/€ 적용")
